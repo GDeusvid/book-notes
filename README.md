@@ -18,7 +18,7 @@ This project was developed with PostgreSQL, you must set up your database as fol
 To run it, you need to have Node.js installed.
 If you already have Node, run:
 
-`git clone https://github.com/GDeusvid/cards-137-RickandMorty.git`
+`git clone https://github.com/GDeusvid/book-notes.git`
 
 `npm i`
 
