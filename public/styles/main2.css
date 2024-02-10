@@ -1,0 +1,217 @@
+.content{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    min-height: 100vh;
+}
+h1 {
+    color: #D17B29;
+    padding: 10px;
+    margin: 0;
+    border: none;
+  }
+  .icon {
+    height: 20px;
+  }
+  
+  #nameInputNew {
+    text-align: left;
+    height: 60px;
+    top: 10px;
+    border: none;
+    background: transparent !important;
+    background-color: transparent !important;
+    font-size: 20px;
+    font-weight: 200;
+    color: aliceblue;
+    
+  }
+  
+  
+  #nameInputNew:focus {
+    outline: none;
+    box-shadow: inset 0 -3px 0 0 #a683e3;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  #nameInputNew:-webkit-autofill {
+    box-shadow: 0 0 0 30px transparent inset !important;
+    background: transparent !important;
+    background-color: transparent !important;
+}
+#nameInputNew::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: transparent;
+    pointer-events: none;
+}
+
+  
+  ::placeholder {
+    color: rgb(209, 208, 208);
+    opacity: 1;
+  }
+  button.add {
+    min-height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: #a683e3;
+    color: #fff;
+    font-size: 30px;
+    border-width: 0;
+  }
+  
+  button.edit {
+    margin-left: 0px;
+    margin-right: 20px;
+    border: none;
+    background: none;
+  }
+  #get{
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: #D17B29;
+  }
+  #get:hover{
+    
+    cursor: pointer;
+    
+    background-color: #b36115;
+  }
+  body{
+    background-image: url("/images/background2.jpg");
+    background-size: cover;
+  background-attachment: fixed;
+  }
+  a{
+    text-decoration: none;
+  }
+  a p{
+    margin: 0;
+    margin-bottom: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #8c69c9;
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+
+
+
+
+
+  .booksarea{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 80%;
+    margin-bottom: 1.5rem;
+  }  
+  .bookssearch{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 32%;
+    margin-bottom: 1rem;
+    
+    background-color: #d17a298a;
+  }
+  .bookssearch .name{
+    width: 100%;
+    aspect-ratio: 1 / .2;
+    
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color: #46257e;
+    border: 2px solid #46257e;
+  }
+  .name h3{
+    margin: 0 5px;
+    color: aliceblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .capa img{
+    width: 18rem;
+    aspect-ratio: 1 / 1.4;
+    margin-top: 5px;
+  }
+  .bookssearch:hover{
+    cursor: pointer;
+  }
+
+ .review form{
+    display: flex;
+    flex-direction: column;
+  }
+  .review{
+    width: 90%;
+  }
+  .avaliation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  #reviewInput{
+    width: 100%;
+        height: auto;
+        min-height: 100px; /* Altura mínima para evitar a entrada parecendo muito pequena */
+        resize: vertical; 
+  }
+
+  input[type="date"] {
+    padding: 0px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    /* Adicione qualquer outra regra de estilo desejada */
+}
+/* Estilizando a data selecionada (apenas em navegadores que suportam) */
+input[type="date"]::-webkit-datetime-edit {
+    color: #333; /* Cor do texto */
+    /* Adicione qualquer outra regra de estilo desejada */
+}
+
+#getreview{
+    margin: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #8c69c9;
+    padding: 3px;
+    border-radius: 3px;
+  }
+  footer {
+    
+    flex: 0 0 auto;
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+    text-align: center;
+    padding: 10px 0;
+  }

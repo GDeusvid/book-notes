@@ -1,0 +1,86 @@
+<%- include('partials/header.ejs'); -%>
+<div class="menuprincipal">
+<a href="/"><h1>Book Notes</h1></a>
+<h2>Your list of books read</h2>
+<form id="search" method="post">
+    
+  <input type="text" id="nameInput" name="name" placeholder="Book Name">
+  <input id="get" type="submit" value="Search" formaction="/get-name">
+  
+</form>
+
+<div class="filtro">
+  <form method="get">
+  <input type="submit" id="newbookbot" value="New Book" formaction="/new-book">
+</form>
+  <div class="button-wrapper">
+    <button id="filter" >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+      </svg> Filter
+    </button>
+    <div class="options">
+      <form method="post">
+        <input type="hidden" id="rateoption" name="escolhaordem" value="rate">
+        <input id="gettypeorder1" type="submit" value="Rating" formaction="/">
+      </form>
+      <form method="post">
+        <input type="hidden" id="recentlyoption" name="escolhaordem" value="recent">
+        <input id="gettypeorder2" type="submit" value="Recently" formaction="/">
+      </form>
+    </div>
+  </div>
+  
+</div>
+</div>
+
+
+
+<div class="booksread">
+  <% if(locals.bookspg){ %>
+    <% let contador=1; %>
+      <% bookspg.forEach(function (dados){ %>
+        
+      <div class="booklist" id="book-<%= contador %>">
+        <div class="capabook">
+          <img src="<%= dados.cover_link %>" alt="">
+        </div>
+        <div class="bookdados">
+          <div class="namebook">
+          <h3><%= dados.name %></h3>
+        </div>
+        <div class="classbook">
+          
+          <!-- <p><%= dados.rating %></p> -->
+          <% for(var i=1;i<dados.rating+1;i++){%>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow"  class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+            <%} %>
+            <% for(var i=1;i<5-dados.rating+1;i++){%>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" class="bi bi-star" viewBox="0 0 16 16">
+                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+              </svg>
+              <%} %>
+        </div>
+        <div class="reviewbook">
+          <p><%= dados.review %></p>
+        </div>
+        <div class="datebook">
+          <p>Read on <%= `${dados.watch.getUTCDate()}/${dados.watch.getUTCMonth() +1}/${dados.watch.getUTCFullYear()}` %></p>
+        </div>
+        </div>
+        
+        
+      </div>
+      <% contador++; %>
+      <% }); %>
+     <% } %>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script>
+   
+  </script>
+  <%- include('partials/footer.ejs'); -%>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Newbook</title>
+</head>
+<body>
+  <div class="content">
+
+  
+<h1>Add Book</h1>
+<a href="/"><p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+  <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+</svg> Back</p></a>
+<form id="searchnew" method="post">
+    
+  <input type="text" id="nameInputNew" name="namenew" placeholder="Search New Book">
+  <input id="get" type="submit" value="Search" formaction="/get-books">
+  
+</form>
+<div class="booksarea">
+  <% if(locals.dadosselect){ %>
+  <% let contador=1; %>
+    <% dadosselect.forEach(function (dados){ %>
+      
+    <div class="bookssearch" id="movie-<%= contador %>">
+      <div class="name">
+        <h3><%= dados.title %></h3>
+      </div>
+      <div class="capa">
+        <img src="https://covers.openlibrary.org/b/id/<%= dados.cover_i %>-L.jpg" alt="">
+      </div>
+      
+      
+    </div>
+    <% contador++; %>
+    <% }); %>
+   <% } %> 
+</div>
+<footer>David Gonçalves, Web Dev © <%= new Date().getFullYear() %>
+</footer>
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+  <script>
+    var bookssearchCLICK=0;
+    $('.bookssearch').on('click', function(){
+      
+      if (bookssearchCLICK==0){
+         var idselected = $(this).attr('id').match(/.{1,6}/g);
+      idselected = parseInt(idselected[1]) ;
+      var imgselect= $(this).find('.capa img').attr('src');
+      var nameselect=$(this).find('.name h3').text();
+      console.log("ahh"+nameselect)
+      
+      for(var i=1;i<7;i++){
+        if (i!=idselected){
+          $(`#movie-${i}`).hide();
+        }else{
+          $(`#movie-${i}`).append(`<div class="review">
+        <form id="userreview" method="post">
+          
+          
+          <textarea id="reviewInput" name="review_input" rows="4" cols="50" placeholder="Review"></textarea><br>
+          <div class="avaliation">
+          <input type="hidden" id="filmeClicado" name="imgselect" value="${imgselect}">
+          <input type="hidden" id="filmeClicado" name="nameselect" value="${nameselect}">
+          <!--<input type="range" id="arateInput" name="avaliacao" min="0" max="5" step="1" value="0">   -->
+          <div>
+            <input type="range" id="avaliacao" name="avaliacao" min="0" max="5" step="1" value="0" style="display: none;">
+            <svg id="estrelas" width="120" height="24" xmlns="http://www.w3.org/2000/svg">
+            <image xlink:href="/images/star.svg" x="0" y="0" width="24" height="24" class="estrela" data-valor="1"/>
+            <image xlink:href="/images/star.svg" x="24" y="0" width="24" height="24" class="estrela" data-valor="2"/>
+            <image xlink:href="/images/star.svg" x="48" y="0" width="24" height="24" class="estrela" data-valor="3"/>
+            <image xlink:href="/images/star.svg" x="72" y="0" width="24" height="24" class="estrela" data-valor="4"/>
+           <image xlink:href="/images/star.svg" x="96" y="0" width="24" height="24" class="estrela" data-valor="5"/>
+            </svg>
+          </div>
+          <input type="date" id="dataAvaliacao" name="dataAvaliacao">
+          <input id="getreview" type="submit" value="Review" formaction="/bookadd">
+        </div>
+        </form>
+      </div>`);
+        }
+      }
+      $(".bookssearch:hover").css("cursor", "default");
+      $(".estrela").css("cursor", "pointer");
+      $("#dataAvaliacao").css("cursor", "pointer");
+      $("#getreview").css("cursor", "pointer");
+      $(".booksarea").css("justify-content", "center");
+      bookssearchCLICK++;
+      $(".estrela").mouseenter(function() {
+        var valor = $(this).data("valor");
+        $(".estrela").each(function() {
+            var estrelaValor = $(this).data("valor");
+            if (estrelaValor <= valor) {
+                $(this).attr("xlink:href", "/images/star-fill.svg");
+            } else {
+                $(this).attr("xlink:href", "/images/star.svg");
+            }
+        });
+    });
+    $(".estrela").on("mouseenter", function() {
+    var valor = $(this).data("valor");
+    $(".estrela").each(function() {
+        var estrelaValor = $(this).data("valor");
+        if (estrelaValor <= valor) {
+            $(this).attr("xlink:href", "/images/star-fill.svg");
+        } else {
+            $(this).attr("xlink:href", "/images/star.svg");
+        }
+    });
+}).on("mouseleave", function() {
+    $(".estrela").each(function() {
+        if (!$(this).hasClass("clicado")) {
+            $(this).attr("xlink:href", "/images/star.svg");
+        }
+    });
+});
+
+$(".estrela").click(function() {
+    var valor = $(this).data("valor");
+    $("#avaliacao").val(valor);
+    $(".estrela").each(function() {
+        var estrelaValor = $(this).data("valor");
+        if (estrelaValor <= valor) {
+            $(this).attr("xlink:href", "/images/star-fill.svg").addClass("clicado");
+        } else {
+            $(this).attr("xlink:href", "/images/star.svg").removeClass("clicado");
+        }
+    });
+});
+      }
+     
+      // $(this).off('click');
+    });
+
+//     function setAvaliacao(valor) {
+//     document.getElementById('avaliacao').value = valor;
+//     document.querySelectorAll('#estrelas image').forEach(function(element, index) {
+//         if(index < valor) {
+//             element.setAttribute('fill', 'gold');
+//         } else {
+//             element.setAttribute('fill', 'none');
+//         }
+//     });
+// }
+
+
+  </script>
+  
+</html>
